@@ -9,6 +9,8 @@ RED = (255, 0, 0, 0)
 GREEN = (0, 255, 0, 0)
 BLUE = (0, 0, 255, 0)
 
+led = LedControl()
+
 
 if __name__ == "__main__":
     while True:
@@ -16,11 +18,11 @@ if __name__ == "__main__":
         # Handle change
         print("test")
         time.sleep(1)
-        LedControl.change_color(RED)
+        led.change_color(RED)
         time.sleep(1)
-        LedControl.change_color(GREEN)
+        led.change_color(GREEN)
         time.sleep(1)
-        LedControl.change_color(BLUE)
+        led.change_color(BLUE)
 
 
 
