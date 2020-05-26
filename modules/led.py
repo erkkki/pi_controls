@@ -24,7 +24,7 @@ class LedControl:
             pixel_order=self.LED_ORDER
         )
         # [(255, 0, 0), (255, 3, 0),
-        self.colors = pickle.load(open("wawelength.pickle", "rb"))
+        self.colors = pickle.load(open("/modules/wawelength.pickle", "rb"))
 
     def set_brightness(self, val):
         self.LED_BRIGHTNESS = val
