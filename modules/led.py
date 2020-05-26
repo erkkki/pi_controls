@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import pickle
 import board
 import neopixel
 
@@ -22,10 +23,22 @@ class LedControl:
             auto_write=False,
             pixel_order=self.LED_ORDER
         )
+        # [(255, 0, 0), (255, 3, 0),
+        self.colors = pickle.load(open("wawelength.pickle", "rb"))
 
     def set_brightness(self, val):
         self.LED_BRIGHTNESS = val
 
+    def get_color(self, val):
+        color = (
+            self.colors[val][0],
+            self.colors[val][1],
+            self.colors[val][2],
+            0
+        )
+        return self.colors[val]
+
     def change_color(self, val):
-        self.strip.fill(val)
+        color = self.get_color(val)
+        self.strip.fill(color)
         self.strip.show()
