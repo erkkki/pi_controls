@@ -6,10 +6,10 @@ from modules.led import LedControl
 from modules.potentiometer import PotControl
 from modules.volume import VolumeControl
 
-led = LedControl(65535)
+POT_MAX_VAL = 65535
+led = LedControl(POT_MAX_VAL)
 pot = PotControl()
-volume = VolumeControl(65535)
-
+volume = VolumeControl(POT_MAX_VAL)
 threads = list()
 pot_values = [0, 0, 0]
 
@@ -39,7 +39,7 @@ def volume_thread():
         time.sleep(0.1)
 
 
-def pot_thread():
+def pot_thread(): # Read potentiometer values from mcp3008
     global pot_values
     while True:
         pot_values = pot.get_pot_values()
@@ -63,7 +63,6 @@ def create_threads():
 if __name__ == "__main__":
     create_threads()
     while True:
-        print(pot_values)
         time.sleep(1)
 
 
