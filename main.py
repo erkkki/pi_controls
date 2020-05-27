@@ -1,36 +1,45 @@
 #!/usr/bin/env python3
 
-import os
 import time
-import modules.test as test
+import threading
 from modules.led import LedControl
 from modules.potentiometer import PotControl
 
 led = LedControl()
 pot = PotControl()
 
-fps = [
-    1/120,
-    1/60,
-    1/30,
-]
+threads = list()
+pot_values = [0, 0, 0]
 
 
-def led_test():
-    for x in range(99):
-        led.color_wheel_update()
-        time.sleep(0.001)
+def led_thread():
+    while True:
+        led.update_strip(pot_values[0])
+        time.sleep(1)
 
 
-def pot_test():
-    time.sleep(1)
-    values = pot.get_pot_values()
-    print(values)
+def pot_thread():
+    global pot_values
+    while True:
+        pot_values = pot.get_pot_values()
+        time.sleep(1)
+
+
+def create_threads():
+    x = threading.Thread(target=led_thread, args=(), daemon=True)
+    threads.append(x)
+    x.start()
+
+    x = threading.Thread(target=pot_thread, args=(), daemon=True)
+    threads.append(x)
+    x.start()
 
 
 if __name__ == "__main__":
+    create_threads()
     while True:
-        led_test()
+        print(pot_values)
+        time.sleep(1)
 
 
 

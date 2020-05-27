@@ -50,10 +50,10 @@ class LedControl:
         self.strip.brightness = self.LED_BRIGHTNESS
         self.strip.show()
 
-    def change_color(self, val):
+    def change_strip_color(self, val):
         color = self.get_color(val)
         self.strip.fill(color)
-        self.strip.show()
+        self.update_strip()
 
     def color_wheel_update(self):
         for x in range(self.LED_COUNT):
