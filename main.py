@@ -26,11 +26,11 @@ def pot_thread():
 
 
 def create_threads():
-    x = threading.Thread(target=led_thread, args=(), daemon=True)
+    x = threading.Thread(name='Led thread', target=led_thread, args=(), daemon=True)
     threads.append(x)
     x.start()
 
-    x = threading.Thread(target=pot_thread, args=(), daemon=True)
+    x = threading.Thread(name='Pot thread', target=pot_thread, args=(), daemon=True)
     threads.append(x)
     x.start()
 
