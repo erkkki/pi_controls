@@ -9,11 +9,17 @@ from modules.potentiometer import PotControl
 led = LedControl()
 pot = PotControl()
 
+fps = [
+    1/120,
+    1/60,
+    1/30,
+]
+
 
 def led_test():
     for x in range(99):
         led.color_wheel_update()
-        time.sleep(1)
+        time.sleep(fps[0])
 
 
 def pot_test():
