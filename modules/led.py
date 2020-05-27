@@ -20,7 +20,7 @@ class LedControl:
     WAWELENGTH = "./modules/wawelength.pickle"
     pos = 0
 
-    def __init__(self):
+    def __init__(self, max_val):
         self.strip = neopixel.NeoPixel(
             self.LED_PIN,
             self.LED_COUNT,
@@ -31,6 +31,7 @@ class LedControl:
         # inside pickle = [(255, 0, 0), (255, 3, 0),
         self.colors = pickle.load(open(self.WAWELENGTH, "rb"))
         self.colors_len = len(self.colors)-1
+        self.max_val = max_val
 
     def set_brightness(self, val):
         self.LED_BRIGHTNESS = val
@@ -50,7 +51,12 @@ class LedControl:
         self.strip.brightness = self.LED_BRIGHTNESS
         self.strip.show()
 
+    def range_remap(self, val):
+        val = int(val / self.max_val)
+        return int(val * self.colors_len)
+
     def change_strip_color(self, val):
+        val = self.range_remap(val)
         color = self.get_color(val)
         self.strip.fill(color)
         self.update_strip()

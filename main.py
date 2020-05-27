@@ -5,7 +5,7 @@ import threading
 from modules.led import LedControl
 from modules.potentiometer import PotControl
 
-led = LedControl()
+led = LedControl(65535)
 pot = PotControl()
 
 threads = list()
