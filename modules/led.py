@@ -2,6 +2,8 @@
 
 import pickle
 import board
+# https://learn.adafruit.com/adafruit-neopixel-uberguide/python-circuitpython
+# https://circuitpython.readthedocs.io/projects/neopixel/en/latest/api.html
 import neopixel
 
 
@@ -9,6 +11,7 @@ import neopixel
 class LedControl:
     # LED strip configuration:
     LED_COUNT = 22  # Number of LED pixels.
+    # On the Raspberry Pi, NeoPixels must be connected to GPIO10, GPIO12, GPIO18 or GPIO21 to work!
     LED_PIN = board.D21  # GPIO pin
     LED_BRIGHTNESS = 0.1  # LED brightness
     LED_MIN_BRIGHTNESS = 0.0
@@ -39,7 +42,7 @@ class LedControl:
             self.colors[val][0],
             self.colors[val][1],
             self.colors[val][2],
-            0
+            128
         )
         return color
 

@@ -19,7 +19,7 @@ fps = [
 def led_test():
     for x in range(99):
         led.color_wheel_update()
-        time.sleep(fps[0])
+        time.sleep(0.001)
 
 
 def pot_test():
