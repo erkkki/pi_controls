@@ -57,6 +57,7 @@ class LedControl:
 
     def change_strip_color(self, val):
         val = self.range_remap(val)
+        print(val)
         color = self.get_color(val)
         self.strip.fill(color)
         self.update_strip()
