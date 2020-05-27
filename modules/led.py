@@ -34,6 +34,8 @@ class LedControl:
         self.max_val = max_val
 
     def set_brightness(self, val):
+        if val > 1:
+            val = self.range_remap(val, 1)
         self.LED_BRIGHTNESS = val
 
     def get_color(self, val):
@@ -51,13 +53,13 @@ class LedControl:
         self.strip.brightness = self.LED_BRIGHTNESS
         self.strip.show()
 
-    def range_remap(self, val):
+    def range_remap(self, val, max_val):
         val = val / self.max_val
-        return int(val * self.colors_len)
+        return val * max_val
 
-    def change_strip_color(self, val):
-        val = self.range_remap(val)
-        color = self.get_color(val)
+    def set_color(self, val):
+        val = self.range_remap(val, self.colors_len)
+        color = self.get_color(int(val))
         self.strip.fill(color)
         self.update_strip()
 

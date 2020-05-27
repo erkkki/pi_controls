@@ -14,7 +14,8 @@ pot_values = [0, 0, 0]
 
 def led_thread():
     while True:
-        led.change_strip_color(pot_values[0])
+        led.set_color(pot_values[0])
+        led.set_brightness(pot_values[1])
         time.sleep(0.04)
 
 
