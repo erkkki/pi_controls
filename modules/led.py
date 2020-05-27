@@ -32,6 +32,8 @@ class LedControl:
         self.LED_BRIGHTNESS = val
 
     def get_color(self, val):
+        if val > len(self.colors)-1:
+            val = val - len(self.colors)-1
         color = (
             self.colors[val][0],
             self.colors[val][1],
@@ -54,5 +56,3 @@ class LedControl:
             self.strip[x] = self.get_color(self.pos + x)
             self.strip.show()
         self.pos = self.pos + 1
-        if self.pos > len(self.colors):
-            self.pos = 0
