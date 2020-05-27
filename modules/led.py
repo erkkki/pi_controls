@@ -42,7 +42,7 @@ class LedControl:
             self.colors[val][0],
             self.colors[val][1],
             self.colors[val][2],
-            128
+            0
         )
         return color
 
