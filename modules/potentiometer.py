@@ -35,5 +35,6 @@ class PotControl:
         new_values = []
         for pin in self.pins:
             new_values.append(pin.value)
+
         self.values = new_values
         return True
