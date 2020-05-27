@@ -27,13 +27,14 @@ class LedControl:
         )
         # inside pickle = [(255, 0, 0), (255, 3, 0),
         self.colors = pickle.load(open(self.WAWELENGTH, "rb"))
+        self.colors_len = len(self.colors)-1
 
     def set_brightness(self, val):
         self.LED_BRIGHTNESS = val
 
     def get_color(self, val):
-        if val > len(self.colors)-1:
-            val = val - len(self.colors)-1
+        if val >= self.colors_len:
+            val = val - self.colors_len
         color = (
             self.colors[val][0],
             self.colors[val][1],
@@ -56,3 +57,5 @@ class LedControl:
             self.strip[x] = self.get_color(self.pos + x)
             self.strip.show()
         self.pos = self.pos + 1
+        if self.pos >= self.colors_len:
+            self.pos = self.pos - self.colors_len
