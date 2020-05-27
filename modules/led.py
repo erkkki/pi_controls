@@ -38,6 +38,7 @@ class LedControl:
             val = self.range_remap(val, 1)
 
         self.LED_BRIGHTNESS = val
+        self.update_strip()
 
     def get_color(self, val):
         if val >= self.colors_len:
