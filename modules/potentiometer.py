@@ -23,7 +23,6 @@ class PotControl:
             AnalogIn(self.mcp, MCP.P2),
         ]
         self.values = [0, 0, 0]
-        self.margin = 400
         self.read_pot_values()
 
     def get_pot_values(self):
@@ -33,10 +32,8 @@ class PotControl:
 
     def read_pot_values(self):
         # read the analog pins
-        values = []
+        new_values = []
         for pin in self.pins:
-            values.append(pin.value)
-        for x in range(3):
-            if values[x] > self.values[x]+self.margin or values[x] < self.values[x]-self.margin:
-                self.values[x] = values[x]
+            new_values.append(pin.value)
+        self.values = new_values
         return True
