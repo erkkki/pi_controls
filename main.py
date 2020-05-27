@@ -15,14 +15,14 @@ pot_values = [0, 0, 0]
 def led_thread():
     while True:
         led.change_strip_color(pot_values[0])
-        time.sleep(0.01)
+        time.sleep(0.04)
 
 
 def pot_thread():
     global pot_values
     while True:
         pot_values = pot.get_pot_values()
-        time.sleep(0.01)
+        time.sleep(0.04)
 
 
 def create_threads():
