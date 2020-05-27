@@ -69,7 +69,7 @@ class LedControl:
         for x in range(self.LED_COUNT):
             self.strip[x] = self.get_color(self.pos + x)
             self.strip.show()
-            
+
         self.pos = self.pos + 1
         if self.pos >= self.colors_len:
             self.pos = self.pos - self.colors_len
