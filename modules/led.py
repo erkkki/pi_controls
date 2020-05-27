@@ -18,7 +18,7 @@ class LedControl:
     LED_MIN_BRIGHTNESS = 0.0
     LED_MAX_BRIGHTNESS = 0.9
     LED_ORDER = neopixel.GRBW  # order of LED colours. May also be RGB, GRBW, or RGBW
-    WAWELENGTH = "wawelength.pickle" # map of different colors. https://github.com/erkkki/wawelength
+    WAWELENGTH = "/modules/wawelength.pickle" # map of different colors. https://github.com/erkkki/wawelength
     pos = 0
 
     def __init__(self, max_val):
