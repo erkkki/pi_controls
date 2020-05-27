@@ -12,7 +12,7 @@ pot = PotControl()
 
 def led_test():
     for x in range(99):
-        led.change_color(x)
+        led.color_wheel_update()
         time.sleep(1)
 
 

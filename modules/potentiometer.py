@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import time
 import board
 import digitalio
 import busio
@@ -8,7 +7,7 @@ import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 
 
-# Read pin values from mcp3008 and check if value has changed.
+# Read pin values from mcp3008
 class PotControl:
     def __init__(self):
         self.spi = busio.SPI(
@@ -26,6 +25,7 @@ class PotControl:
         self.values = [0, 0, 0]
 
     def get_pot_values(self):
+        # read and update values.
         self.read_pot_values()
         return self.values
 

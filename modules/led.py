@@ -14,6 +14,8 @@ class LedControl:
     LED_MIN_BRIGHTNESS = 0.0
     LED_MAX_BRIGHTNESS = 0.9
     LED_ORDER = neopixel.GRBW  # order of LED colours. May also be RGB, GRBW, or RGBW
+    WAWELENGTH = "./modules/wawelength.pickle"
+    pos = 0
 
     def __init__(self):
         self.strip = neopixel.NeoPixel(
@@ -23,8 +25,8 @@ class LedControl:
             auto_write=False,
             pixel_order=self.LED_ORDER
         )
-        # [(255, 0, 0), (255, 3, 0),
-        self.colors = pickle.load(open("/modules/wawelength.pickle", "rb"))
+        # inside pickle = [(255, 0, 0), (255, 3, 0),
+        self.colors = pickle.load(open(self.WAWELENGTH, "rb"))
 
     def set_brightness(self, val):
         self.LED_BRIGHTNESS = val
@@ -36,9 +38,21 @@ class LedControl:
             self.colors[val][2],
             0
         )
-        return self.colors[val]
+        return color
+
+    def update_strip(self):
+        self.strip.brightness = self.LED_BRIGHTNESS
+        self.strip.show()
 
     def change_color(self, val):
         color = self.get_color(val)
         self.strip.fill(color)
         self.strip.show()
+
+    def color_wheel_update(self):
+        for x in range(self.LED_COUNT):
+            self.strip[x] = self.get_color(self.pos + x)
+            self.strip.show()
+        self.pos = self.pos + 1
+        if self.pos > len(self.colors):
+            self.pos = 0
