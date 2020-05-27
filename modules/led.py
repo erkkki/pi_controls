@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import pickle
 import board
 # https://learn.adafruit.com/adafruit-neopixel-uberguide/python-circuitpython
@@ -17,7 +18,7 @@ class LedControl:
     LED_MIN_BRIGHTNESS = 0.0
     LED_MAX_BRIGHTNESS = 0.9
     LED_ORDER = neopixel.GRBW  # order of LED colours. May also be RGB, GRBW, or RGBW
-    WAWELENGTH = "./modules/wawelength.pickle" # map of different colors. https://github.com/erkkki/wawelength
+    WAWELENGTH = "wawelength.pickle" # map of different colors. https://github.com/erkkki/wawelength
     pos = 0
 
     def __init__(self, max_val):
@@ -29,7 +30,12 @@ class LedControl:
             pixel_order=self.LED_ORDER
         )
         # inside pickle = [(255, 0, 0), (255, 3, 0),
-        self.colors = pickle.load(open(self.WAWELENGTH, "rb"))
+        self.colors = pickle.load(
+            open(
+                os.path.abspath(os.getcwd()) + self.WAWELENGTH,
+                "rb"
+            )
+        )
         self.colors_len = len(self.colors)-1
         self.max_val = max_val
 
