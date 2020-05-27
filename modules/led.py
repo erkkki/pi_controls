@@ -52,7 +52,7 @@ class LedControl:
         self.strip.show()
 
     def range_remap(self, val):
-        val = int(val / self.max_val)
+        val = val / self.max_val
         return int(val * self.colors_len)
 
     def change_strip_color(self, val):
