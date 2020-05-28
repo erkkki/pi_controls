@@ -80,10 +80,12 @@ class LedControl:
                 color_pos = self.pos + x
             else:
                 color_pos = self.pos - x
-            if color_pos > self.colors_len:
+            if color_pos >= self.colors_len:
                 self.dir = False
-            if color_pos == 0:
+                color_pos = self.colors_len
+            if color_pos <= 0:
                 self.dir = True
+                color_pos = 0
             self.strip[x] = self.get_color(color_pos)
             self.pos = self.pos + 1
         self.update_strip()
