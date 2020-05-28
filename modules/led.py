@@ -19,6 +19,7 @@ class LedControl:
     LED_ORDER = neopixel.GRBW  # order of LED colours. May also be RGB, GRBW, or RGBW
     WAWELENGTH = "/home/pi/Documents/pi_controls/modules/wawelength.pickle" # map of different colors. https://github.com/erkkki/wawelength
     pos = 0
+    dir = True
 
     def __init__(self, max_val):
         self.strip = neopixel.NeoPixel(
@@ -51,9 +52,6 @@ class LedControl:
         return True
 
     def get_color(self, val):
-        if val > self.colors_len:
-            val = self.colors_len
-
         color = (
             self.colors[val][0],
             self.colors[val][1],
@@ -78,9 +76,14 @@ class LedControl:
 
     def color_wheel_update(self):
         for x in range(self.LED_COUNT):
-            self.strip[x] = self.get_color(self.pos + x)
-            self.update_strip()
-
-        self.pos = self.pos + 1
-        if self.pos >= self.colors_len:
-            self.pos = self.pos - self.colors_len
+            if self.dir:
+                color_pos = self.pos + x
+            else:
+                color_pos = self.pos - x
+            if color_pos > self.colors_len:
+                self.dir = False
+            if color_pos == 0:
+                self.dir = True
+            self.strip[x] = self.get_color(color_pos)
+            self.pos = self.pos + 1
+        self.update_strip()
