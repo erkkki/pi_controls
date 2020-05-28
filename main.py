@@ -20,7 +20,6 @@ def led_thread():
     while True:
         if pot_values[0] > 50000:
             led.color_wheel_update()
-            time.sleep(0.2)
         else:
             if old_values[0] > pot_values[0] + margin or old_values[0] < pot_values[0] - margin:
                 led.set_color(pot_values[0])
