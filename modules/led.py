@@ -80,5 +80,5 @@ class LedControl:
                 self.dir = True
                 color_pos = 0
             self.strip[x] = self.get_color(color_pos)
-            self.pos = self.pos + 1
+            self.pos = color_pos
         self.update_strip()
