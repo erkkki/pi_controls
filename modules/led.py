@@ -35,6 +35,13 @@ class LedControl:
         self.colors_len = len(self.colors)-1
         self.max_val = max_val
 
+    def update(self, val):
+        if val > 50000:
+            self.color_wheel_update()
+        else:
+            self.set_color(val)
+        return True
+
     def set_brightness(self, val):
         if val > 1:
             val = self.range_remap(val, self.LED_MAX_BRIGHTNESS)
@@ -44,8 +51,8 @@ class LedControl:
         return True
 
     def get_color(self, val):
-        if val >= self.colors_len:
-            val = val - self.colors_len
+        if val > self.colors_len:
+            val = self.colors_len
 
         color = (
             self.colors[val][0],
@@ -72,7 +79,7 @@ class LedControl:
     def color_wheel_update(self):
         for x in range(self.LED_COUNT):
             self.strip[x] = self.get_color(self.pos + x)
-            self.strip.show()
+            self.update_strip()
 
         self.pos = self.pos + 1
         if self.pos >= self.colors_len:

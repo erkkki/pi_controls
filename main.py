@@ -19,7 +19,7 @@ def led_thread():
     old_values = pot_values
     while True:
         if old_values[0] > pot_values[0] + margin or old_values[0] < pot_values[0] - margin:
-            led.set_color(pot_values[0])
+            led.update(pot_values[0])
 
         if old_values[1] > pot_values[1] + margin or old_values[1] < pot_values[1] - margin:
             led.set_brightness(pot_values[1])
