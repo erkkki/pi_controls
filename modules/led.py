@@ -68,11 +68,12 @@ class LedControl:
         self.update_strip()
 
     def color_wheel_update(self):
+        color_pos = self.pos
         for x in range(self.LED_COUNT):
             if self.dir:
-                color_pos = self.pos + x
+                color_pos = color_pos + 1
             else:
-                color_pos = self.pos - x
+                color_pos = color_pos - 1
             if color_pos >= self.colors_len:
                 self.dir = False
                 color_pos = self.colors_len
