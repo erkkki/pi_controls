@@ -28,7 +28,7 @@ def led_thread():
             led.set_brightness(pot_values[1])
 
         old_values = pot_values
-        time.sleep(0.04)
+        time.sleep(0.1)
 
 
 def volume_thread():
